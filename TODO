@@ -1,0 +1,8 @@
+- Remove hard coded cred from code
+
+
+Orchestration Agent
+Requirements Analyzer → determine what user needs 
+Planner Agent → structure the diagram
+Mermaid Writer Tool → generate syntax
+Validation Tool → verify correctness

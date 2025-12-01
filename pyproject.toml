@@ -1,0 +1,46 @@
+[project]
+name = "fastapi_lang_graph"
+version = "0.1.0"
+description = "FastAPI + LangGraph backend service."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Nikhil Dhole", email = "nikhildadaddhole@gmail.com" }
+]
+
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "langgraph",
+    "langchain[google-genai]",
+    "pydantic",
+    "pydantic-settings",
+    "langchain-google-vertexai",
+    "python-dotenv",
+    "langchain-model-profiles"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# --------------------------------------------------------------------
+# HATCH ENV + SCRIPTS (Fully valid + modern replacement for uv scripts)
+# --------------------------------------------------------------------
+
+[tool.hatch.envs.default]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+]
+
+[project.scripts]
+dev = "fastapi_lang_graph.cli:dev"
+start = "fastapi_lang_graph.cli:start"
+prod = "fastapi_lang_graph.cli:prod"
