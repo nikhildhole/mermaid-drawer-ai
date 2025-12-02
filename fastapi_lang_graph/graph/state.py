@@ -11,4 +11,5 @@ class MessagesState(TypedDict):
     user_query: str
     messages: Annotated[list[AnyMessage], operator.add]
     agent_to_call: str
+    agent_instructions: str
     tasks: list[Task]

@@ -1,5 +1,5 @@
 from langchain.messages import SystemMessage
-from fastapi_lang_graph.graph.models.gemini import gemini
+from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
 
 prompt = """
 You are a mermaid syntax validator.
@@ -11,7 +11,7 @@ def summary_generator(state: dict):
 
     return {
         "messages": [
-            gemini.invoke(
+            gemini_2_5_flash_lite.invoke(
                 [
                     SystemMessage(
                         content=prompt
