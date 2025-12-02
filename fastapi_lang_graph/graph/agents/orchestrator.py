@@ -6,7 +6,7 @@ from langchain.agents import create_agent
 from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
 
 class Route(BaseModel):
-    next_agent: Literal["mermaid_validator", "planner", "requirements_analyzer", "mermaid_generator"] = Field(
+    next_agent: Literal["mermaid_validator", "planner", "requirements_gatherer", "mermaid_generator"] = Field(
         None, description="The next agent to callin the routing process"
     )
     instructions: str = Field(

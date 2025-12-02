@@ -17,7 +17,8 @@ dependencies = [
     "pydantic-settings",
     "langchain-google-vertexai",
     "python-dotenv",
-    "langchain-model-profiles"
+    "langchain-model-profiles",
+    "duckduckgo-search"
 ]
 
 [project.optional-dependencies]
