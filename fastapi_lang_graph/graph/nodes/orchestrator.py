@@ -1,13 +1,22 @@
 from langchain_core.messages import AIMessage 
 
 from fastapi_lang_graph.graph.agents.orchestrator import orchestrator_agent
-
+from fastapi_lang_graph.core.logging import logger
 
 def orchestrator(state: dict):
     """Orchestrator node to decide which agent to call next"""
+    
+    logger.info("****************************")
+    logger.info("Orchestrator node called")
+    logger.info("****************************")
 
+    logger.info(f"Current state messages: {[msg.content for msg in state['messages']]}")
+
+    # Invoke the orchestrator agent
     messages = {"messages": state["messages"]}
     agent_to_call = orchestrator_agent.invoke(messages)
+
+    logger.info(f"Orchestrator decided to call: {agent_to_call.get('structured_response').next_agent}, with instructions: {agent_to_call.get('structured_response').instructions}")
 
     return {
         "messages": agent_to_call.get("messages") + [AIMessage(content=agent_to_call.get("structured_response").instructions)],

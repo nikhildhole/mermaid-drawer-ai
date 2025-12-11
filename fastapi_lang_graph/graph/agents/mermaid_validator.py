@@ -3,11 +3,20 @@ from langchain.tools import tool
 
 from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
 from fastapi_lang_graph.services.redis import get_code
+from fastapi_lang_graph.core.logging import logger
 
 @tool
 def get_current_code() -> str:
     """Get the current mermaid code."""
-    return get_code()
+    logger.info("#############################")
+    logger.info("get current code function called")
+    logger.info("#############################")
+
+    current_code = get_code()
+
+    logger.info(f"Current mermaid code:\n{current_code}")
+
+    return current_code
 
 
 PROMPT = """

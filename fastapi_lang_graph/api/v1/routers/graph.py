@@ -13,7 +13,13 @@ class AskRequest(BaseModel):
 @router.post("/ask")
 async def run_graph(request: AskRequest):
     """Endpoint to run the agent graph with a user query"""
+
+    logger.info("-----------------------------------------------------------------------------------")
+    logger.info("Starting new graph execution")
+    logger.info("-----------------------------------------------------------------------------------")
+
     logger.info(f"Received query: {request.query}")
+    
     messages = [HumanMessage(content=request.query)]
     messages = agent.invoke({"messages": messages})
     return messages["messages"][-1].content
