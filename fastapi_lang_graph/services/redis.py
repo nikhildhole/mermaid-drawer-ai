@@ -5,7 +5,7 @@ graph TD
     B -- No --> D[Check logs]
     D --> B
 """
-def get_current_code() -> str:
+def get_code() -> str:
     global code
     return code
 

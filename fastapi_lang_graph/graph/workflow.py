@@ -30,6 +30,7 @@ agent_builder.add_conditional_edges(
         "planner": "planner",
         "requirements_gatherer": "requirements_gatherer",
         "mermaid_generator": "mermaid_generator",
+        "summary_generator": "summary_generator",
     },
 )
 agent_builder.add_edge("mermaid_validator", "orchestrator")

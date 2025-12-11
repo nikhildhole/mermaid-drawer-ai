@@ -18,7 +18,9 @@ dependencies = [
     "langchain-google-vertexai",
     "python-dotenv",
     "langchain-model-profiles",
-    "duckduckgo-search"
+    "duckduckgo-search",
+    "langchain-community",
+    "ddgs"
 ]
 
 [project.optional-dependencies]
@@ -36,6 +38,8 @@ build-backend = "hatchling.build"
 # --------------------------------------------------------------------
 
 [tool.hatch.envs.default]
+inherit = true
+features = ["dev"]
 dependencies = [
     "fastapi",
     "uvicorn",

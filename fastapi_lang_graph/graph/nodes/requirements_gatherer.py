@@ -1,24 +1,14 @@
-from langchain.messages import SystemMessage
-from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
 
-prompt = """
-You are a mermaid syntax validator.
-"""
+from fastapi_lang_graph.graph.agents.requirements_gatherer import requirements_gatherer_agent
 
 
 def requirements_gatherer(state: dict):
-    """Mermaid syntax validator"""
+    """Requirements gatherer"""
+
+    messages = {"messages": state["messages"]}
+    result = requirements_gatherer_agent.invoke(messages)
 
     return {
-        "messages": [
-            gemini_2_5_flash_lite.invoke(
-                [
-                    SystemMessage(
-                        content=prompt
-                    )
-                ]
-                + state["messages"]
-            )
-        ],
-        "llm_calls": state.get('llm_calls', 0) + 1
+        "messages": result.get("messages"),
+        "llm_calls": state.get('llm_calls', 0) + 1,
     }

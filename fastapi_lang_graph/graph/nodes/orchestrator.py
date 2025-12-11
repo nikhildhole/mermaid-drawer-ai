@@ -27,5 +27,7 @@ def route_decision(state: dict):
         return "requirements_gatherer"
     elif state["agent_to_call"] == "mermaid_generator":
         return "mermaid_generator"
+    elif state["agent_to_call"] == "summary_generator":
+        return "summary_generator"
     else:
         raise ValueError(f"Unknown agent to call: {state['agent_to_call']}")

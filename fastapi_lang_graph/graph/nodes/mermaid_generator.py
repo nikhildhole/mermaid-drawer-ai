@@ -3,7 +3,7 @@ from fastapi_lang_graph.graph.agents.mermaid_generator import mermaid_generator_
 
 
 def mermaid_generator(state: dict):
-    """Mermaid syntax validator"""
+    """Mermaid syntax generator"""
 
     messages = {"messages": state["messages"]}
     result = mermaid_generator_agent.invoke(messages)

@@ -1,5 +1,4 @@
 from langchain.agents import create_agent
-from langchain.tools import tool
 
 from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
 
@@ -13,7 +12,7 @@ You are a mermaid code writer agent planner. You can create plan and list of tas
 Based on user query create a plan and list of tasks to be performed by these agents in sequential order. Provide the plan and list of tasks as output.
 """
 
-mermaid_validator_agent = create_agent(
+planner_agent = create_agent(
     model=gemini_2_5_flash_lite,
     system_prompt=PROMPT,
 )

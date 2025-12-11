@@ -2,12 +2,12 @@ from langchain.agents import create_agent
 from langchain.tools import tool
 
 from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
-from fastapi_lang_graph.services.redis import get_current_code, write_code
+from fastapi_lang_graph.services.redis import get_code, write_code
 
 @tool
 def get_current_code() -> str:
     """Get the current mermaid code."""
-    return get_current_code()
+    return get_code()
 
 @tool
 def write_to_current_code(new_code: str) -> bool:
