@@ -1,5 +1,5 @@
 
-from fastapi_lang_graph.graph.agents.mermaid_generator import mermaid_generator_agent
+from fastapi_lang_graph.graph.agents.mermaid_generator import mermaid_generator_agent, current_user_id
 from fastapi_lang_graph.core.logging import logger
 
 
@@ -10,7 +10,11 @@ def mermaid_generator(state: dict):
     logger.info("mermaid generator node called")
     logger.info("****************************")
 
-    logger.info(f"Current state messages: {[msg.content for msg in state['messages']]}")
+
+    # Set the user_id in context for tools to access
+    user_id = state.get('user_id', '')
+    current_user_id.set(user_id)
+    logger.info(f"Processing for user_id: {user_id}")
 
     messages = {"messages": state["messages"]}
     result = mermaid_generator_agent.invoke(messages)

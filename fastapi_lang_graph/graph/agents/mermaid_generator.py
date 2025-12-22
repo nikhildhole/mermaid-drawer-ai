@@ -1,9 +1,13 @@
 from langchain.agents import create_agent
 from langchain.tools import tool
+from contextvars import ContextVar
 
 from fastapi_lang_graph.graph.models.gemini import gemini_2_5_flash_lite
-from fastapi_lang_graph.services.redis import get_code, write_code
+from fastapi_lang_graph.services.code import get_code, write_code
 from fastapi_lang_graph.core.logging import logger
+
+# Context variable to store current user_id
+current_user_id: ContextVar[str] = ContextVar('current_user_id', default='')
 
 @tool
 def get_current_code() -> str:
@@ -12,9 +16,10 @@ def get_current_code() -> str:
     logger.info("get current code function called")
     logger.info("#############################")
 
-    current_code = get_code()
+    user_id = current_user_id.get()
+    current_code = get_code(user_id)
 
-    logger.info(f"Current mermaid code:\n{current_code}")
+    logger.info(f"Current mermaid code for user {user_id}:\n{current_code}")
 
     return current_code
 
@@ -25,9 +30,10 @@ def write_to_current_code(new_code: str) -> bool:
     logger.info("write to current code function called")
     logger.info("#############################")
 
-    logger.info(f"New mermaid code to write:\n{new_code}")
+    user_id = current_user_id.get()
+    logger.info(f"New mermaid code to write for user {user_id}:\n{new_code}")
 
-    return write_code(new_code)
+    return write_code(user_id, new_code)
 
 PROMPT = """
 You are a mermaid code generator. Generate mermaid instruction based on given instruction.
